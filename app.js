@@ -1,0 +1,14 @@
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 3000;
+
+const placesRoutes = require("./routes/places");
+
+const db = require("./db/db")();
+app.use("/places", placesRoutes);
+
+
+
+app.listen(port, () => {
+  console.log(`localhost:${port} -> API aktif. `);
+});
