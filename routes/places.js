@@ -13,7 +13,7 @@ const toVisitPlace = require("../models/toVisitPlace");
 router.get("/visited", function (req, res) {
   VisitedPlace.find()
     .then((places) => {
-      res.status(500).json({
+      res.status(200).json({
         message: "All visited places are fetched.",
       });
     })
@@ -26,15 +26,15 @@ router.get("/visited", function (req, res) {
 router.get("/visited/:placeID", function (req, res) {
   const id = req.params.placeID;
   VisitedPlace.findById({
-    _id: id,
-  })
+      _id: id,
+    })
     .then((places) => {
-      res.status(500).json({
+      res.status(200).json({
         message: "Visited place is fetched.",
       });
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).json(err);
     });
 });
 
@@ -80,8 +80,8 @@ router.delete("/visited/:placeID", (req, res, next) => {
   const id = req.params.placeID;
   console.log(id);
   VisitedPlace.deleteOne({
-    _id: id,
-  })
+      _id: id,
+    })
     .exec()
     .then((result) => {
       console.log(result);
@@ -145,12 +145,12 @@ router.get("/toVisit", function (req, res) {
   toVisitPlace
     .find()
     .then((places) => {
-      res.status(500).json({
+      res.status(200).json({
         message: "All ToVisit places are fetched.",
       });
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).json(err);
     });
 });
 
@@ -158,8 +158,8 @@ router.get("/toVisit", function (req, res) {
 router.get("/toVisit/:placeID", function (req, res) {
   const id = req.params.placeID;
   ToVisitPlace.findById({
-    _id: id,
-  })
+      _id: id,
+    })
     .then((places) => {
       res.status(500).json({
         message: "ToVisit place is fetched by id.",
@@ -207,8 +207,8 @@ router.delete("/toVisit/:placeID", function (req, res, next) {
   const id = req.params.placeID;
   console.log(id);
   ToVisitPlace.deleteOne({
-    _id: id,
-  })
+      _id: id,
+    })
     .exec()
     .then((result) => {
       console.log(result);
